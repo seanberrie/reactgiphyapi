@@ -3,6 +3,7 @@ import 'milligram'
 import './App.css'
 import Search from './components/Search'
 import Navbar from './components/Navbar'
+import Searchresults from './components/Searchresults'
 
 class App extends Component {
   render () {
@@ -14,7 +15,6 @@ class App extends Component {
           <h4>The true source for all things giphy</h4>
         </div>
         <Search />
-
       </main>
     )
   }

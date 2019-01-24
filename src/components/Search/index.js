@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Results from '../Searchresults'
 
 class Search extends Component {
   state = {
@@ -11,15 +12,11 @@ class Search extends Component {
   {this.setState({ [name]: value })}
 
   handleSubmit = (e) => {
-      debugger
     e.preventDefault()
     let { search } = this.state
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=OcA9OeImWUvYzwIICTGl5yufd98dKNky`)
+    axios.get(`http://api.giphy.com/v1/gifs/search?q=${search}&api_key=OcA9OeImWUvYzwIICTGl5yufd98dKNky`)
      .then(({ data }) => {
-       if (data.images.fixed_height) {
-       this.setState({ advice: data.message.text, search: ""})
-     } else
-      this.setState({ advice: data.slips[0].advice, search: "" })
+       this.setState({ results: data.data})
     })
   }
   render() {
@@ -34,6 +31,7 @@ class Search extends Component {
           name='search'
           onChange={this.handleChange}
           placeholder='Let The Fun Begin!'
+          value={ search }
         />
         <input
           className='searchbutton'
@@ -42,6 +40,7 @@ class Search extends Component {
          />
       </div>
     </form>
+    <Results results={this.state.results} />
     </div>
   )}
 }
